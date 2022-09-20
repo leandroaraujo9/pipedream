@@ -1539,6 +1539,9 @@ importers:
       '@types/node': 17.0.45
       '@types/object-hash': 2.2.1
 
+  components/sailpoint:
+    specifiers: {}
+
   components/sales_simplify:
     specifiers: {}
 
@@ -1728,6 +1731,9 @@ importers:
   components/snapchat_marketing:
     specifiers: {}
 
+  components/snapdocs:
+    specifiers: {}
+
   components/snowflake:
     specifiers:
       '@pipedream/platform': ^0.10.0
@@ -1780,6 +1786,12 @@ importers:
       '@pipedream/platform': ^0.10.0
     dependencies:
       '@pipedream/platform': 0.10.0
+
+  components/stormboard:
+    specifiers:
+      '@pipedream/platform': ^1.1.0
+    dependencies:
+      '@pipedream/platform': 1.1.1
 
   components/stormglass_io:
     specifiers: {}
@@ -2101,6 +2113,9 @@ importers:
   components/waitwhile:
     specifiers: {}
 
+  components/wakatime:
+    specifiers: {}
+
   components/webflow:
     specifiers:
       '@pipedream/platform': ^1.1.0
@@ -2265,6 +2280,9 @@ importers:
       '@pipedream/platform': ^0.10.0
     dependencies:
       '@pipedream/platform': 0.10.0
+
+  components/zoho_sheet:
+    specifiers: {}
 
   components/zonka_feedback:
     specifiers:
@@ -5193,22 +5211,22 @@ packages:
       kuler: 2.0.0
     dev: false
 
-  /@definitelytyped/header-parser/0.0.127:
-    resolution: {integrity: sha512-4BvTT/EXZPqkmpw/mhg7inbaLI16Sq1E7K6QeWoTGU60mf8sfB7me7Kta+/EYZptZzyyt/xR6I7MnptWuDCoPw==}
+  /@definitelytyped/header-parser/0.0.130:
+    resolution: {integrity: sha512-YlxMpcHRiS7fdx4soaR0JKSf4NY4jsDRmu47YGId/DsTd0uhZIlUPJKULhMKMivgdOhJKHrNvfB2pWla4Q8atA==}
     dependencies:
-      '@definitelytyped/typescript-versions': 0.0.127
+      '@definitelytyped/typescript-versions': 0.0.130
       '@types/parsimmon': 1.10.6
       parsimmon: 1.18.1
     dev: true
 
-  /@definitelytyped/typescript-versions/0.0.127:
-    resolution: {integrity: sha512-q/vGlB0sVOKeEj4L661MmYPmBBzfZltG/unjsFGBaglu1zz9BIuhSW3NYPeiPrtq8OyrwtR6slet22b2SH/xyw==}
+  /@definitelytyped/typescript-versions/0.0.130:
+    resolution: {integrity: sha512-yAcgQPDahepjsUzUbOFWNvG7yNtrkoqeb56Sh64jf0yJ875oc4N8V1/U+XIG5TRvzezP0ch9m7rIxATR/OyDIw==}
     dev: true
 
-  /@definitelytyped/utils/0.0.127:
-    resolution: {integrity: sha512-EBpYDuYt8T9i63k/jBjWgF7Gr6YebKUiKaNH5kWkIfvGAC1NfyruhxBT40pFTcKICt02/w4Bws/AcjEEekWyww==}
+  /@definitelytyped/utils/0.0.130:
+    resolution: {integrity: sha512-cDgPSk6WznDImz6svQFfs/pHrK4gK0em3mXzHdJofAJtKcEZeiaCH3rRxLO10CexRYR+aiXQ+hYwTS9bs4HfWw==}
     dependencies:
-      '@definitelytyped/typescript-versions': 0.0.127
+      '@definitelytyped/typescript-versions': 0.0.130
       '@qiwi/npm-registry-client': 8.9.1
       '@types/node': 14.18.22
       charm: 1.0.2
@@ -10726,7 +10744,7 @@ packages:
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@definitelytyped/header-parser': 0.0.127
+      '@definitelytyped/header-parser': 0.0.130
       command-exists: 1.2.9
       rimraf: 3.0.2
       semver: 6.3.0
@@ -10742,9 +10760,9 @@ packages:
     peerDependencies:
       typescript: '>= 3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.7.0-dev || >= 3.8.0-dev || >= 3.9.0-dev || >= 4.0.0-dev'
     dependencies:
-      '@definitelytyped/header-parser': 0.0.127
-      '@definitelytyped/typescript-versions': 0.0.127
-      '@definitelytyped/utils': 0.0.127
+      '@definitelytyped/header-parser': 0.0.130
+      '@definitelytyped/typescript-versions': 0.0.130
+      '@definitelytyped/utils': 0.0.130
       dts-critic: 3.3.11_typescript@4.7.4
       fs-extra: 6.0.1
       json-stable-stringify: 1.0.1
@@ -16892,6 +16910,7 @@ packages:
   /querystring/0.2.0:
     resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
     engines: {node: '>=0.4.x'}
+    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: false
 
   /querystring/0.2.1:
@@ -17770,6 +17789,7 @@ packages:
 
   /semver/7.0.0:
     resolution: {integrity: sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==}
+    hasBin: true
     dev: false
 
   /semver/7.3.7:

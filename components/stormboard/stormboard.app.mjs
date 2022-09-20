@@ -7,89 +7,104 @@ export default {
   propDefinitions: {
     stormId: {
       type: "integer",
-      label: "Storm ID",
-      description: "You can find this value inside your Storm's share dialog."
+      label: "Storm Id",
+      description: "The identification of your stormboard. You can find this value inside your Storm's share dialog.",
+      async options() {
+        return this.listStormOpts();
+      },
     },
     ideaType: {
       type: "string",
-      label: "Idea Type",
-      description: "Options: text, indexcard, image, video, document, whiteboard",
+      label: "Type",
+      description: "The content type of your new idea.",
       optional: true,
       options: constants.IDEA_TYPE_OPTIONS,
-      default: "text"
-    },
-    ideaData: {
-      type: "string",
-      label: "Idea Data",
-      description: "Text, video URL, image data, document data. Image and document data must be base64 format.",
-      optional: true,
+      default: "text",
     },
     ideaName: {
       type: "string",
-      label: "Idea Name",
+      label: "Name",
       description: "Name of video, whiteboard, image, or document. Images and documents should include file extension.",
     },
-    ideaColor: {
+    ideaData: {
       type: "string",
-      label: "Idea Color",
-      description: "Color of new idea. Must be one of the following: yellow, pink, green, blue, purple, grey, red, silver, orange.",
-      optional: true,
-      options: constants.IDEA_COLOR_OPTIONS,
-      default: "yellow"
-    },
-    ideaShape: {
-      type: "string",
-      label: "Idea Shape",
-      description: "Shape of new idea. Must be one of the following: standard, gem, hexagon, octagon, square, title, triangle.",
-      optional: true,
-      options: constants.IDEA_SHAPE_OPTIONS,
-      default: "standard"
+      label: "Data",
+      description: "Text, video URL, image data, document data. Image and document data must be base64 format.",
     },
     ideaPositionX: {
       type: "integer",
-      label: "Idea Position X",
-      description: "X position for the new idea.",
+      label: "Position X",
+      description: "The X position on the stormboard for the new idea.",
     },
     ideaPositionY: {
       type: "integer",
-      label: "Idea Position Y",
-      description: "Y position for the new idea.",
+      label: "Position Y",
+      description: "The Y position on the stormboard for the new idea.",
+    },
+    ideaColor: {
+      type: "string",
+      label: "Color",
+      description: "The background color of your new idea. Must be one of the following: `yellow`, `pink`, `green`, `blue`, `purple`, `grey`, `red`, `silver`, `orange`.",
+      optional: true,
+      options: constants.IDEA_COLOR_OPTIONS,
+      default: "yellow",
+    },
+    ideaShape: {
+      type: "string",
+      label: "Shape",
+      description: "The shape of your new idea. Must be one of the following: `gem`, `hexagon`, `octagon`, `square`, `title`, `triangle`.",
+      optional: true,
+      options: constants.IDEA_SHAPE_OPTIONS,
     },
     ideaLock: {
-      type: "integer",
-      label: "Idea Locked",
-      description: "1 if the idea is to be locked, 0 if the idea is not locked.",
+      type: "boolean",
+      label: "Locked",
+      description: "Set `true` if the new idea should be locked, otherwise `false`.",
       optional: true,
-      options: constants.IDEA_LOCK_OPTIONS,
-      default: 0
     },
   },
   methods: {
-    _accessToken() {
-      return this.$auth.api_key;
+    _getBaseUrl() {
+      return "https://api.stormboard.com";
     },
-    _getBaseURL() {
-      return "https://api.stormboard.com/";
-    },
-    _getAuthHeader() {
+    _getHeaders() {
       return {
         "Content-Type": "application/json",
         "X-API-Key": this.$auth.api_key,
       };
     },
-    async _makeRequest(path, $ = this) {
-      return axios($, {
-        url: `${this._getBaseURL}/${path}`,
-        headers: this._getAuthHeader(),
-      });
+    _getRequestParams(opts = {}) {
+      return {
+        ...opts,
+        url: this._getBaseUrl() + opts.path,
+        headers: this._getHeaders(),
+      };
     },
-    async createIdea(args = {}) {
-      const response = await this._makeRequest(`ideas`, {
+    async createIdea(ctx = this, data) {
+      const response = await axios(ctx, this._getRequestParams({
         method: "POST",
-        ...args,
+        path: "/ideas",
+        data,
+      }));
+      return response;
+    },
+    async listStorms(ctx = this, params) {
+      const response = await axios(ctx, this._getRequestParams({
+        method: "GET",
+        path: "/storms/list",
+        params,
+      }));
+      return response.storms;
+    },
+    async listStormOpts(ctx = this) {
+      const storms = await this.listStorms(ctx, {
+        status: "open",
+        results: 100,
       });
-
-      return response.data
+      return storms.map((storm) => ({
+        label: storm.title,
+        value: storm.id,
+      }));
     },
   },
 };
