@@ -1616,9 +1616,6 @@ importers:
   components/sailpoint:
     specifiers: {}
 
-  components/sailpoint_personal_token:
-    specifiers: {}
-
   components/sales_simplify:
     specifiers: {}
 
@@ -1880,6 +1877,12 @@ importers:
       '@pipedream/platform': 0.10.0
 
   components/statuscake:
+    specifiers:
+      '@pipedream/platform': ^1.1.0
+    dependencies:
+      '@pipedream/platform': 1.1.1
+
+  components/stormboard:
     specifiers:
       '@pipedream/platform': ^1.1.0
     dependencies:
@@ -17081,6 +17084,7 @@ packages:
   /querystring/0.2.0:
     resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
     engines: {node: '>=0.4.x'}
+    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: false
 
   /querystring/0.2.1:
